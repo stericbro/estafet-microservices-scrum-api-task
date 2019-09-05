@@ -81,7 +81,7 @@ public class ITTaskTest {
 	@Test
 	@DatabaseSetup("ITTaskTest-data.xml")
 	public void testCreateTask() throws Exception {
-		String body = 
+		String body =
 		given()
 			.contentType(ContentType.JSON)
 			.body("{\"title\":\"Task #3\",\"description\":\"Task #3\",\"initialHours\":5}")

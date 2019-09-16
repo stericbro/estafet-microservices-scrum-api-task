@@ -3,9 +3,9 @@ Microservices api for managing tasks and their lifecycle for the scrum demo appl
 ## What is this?
 This application is a microservice provides an API to add tasks to a given story. The life cycle of these tasks are affected by operations such as claim task, update hours and complete task.
 
-Each microservice has it's own git repository, but there is a master git repository that contains links to all of the repositories [here](https://github.com/Estafet-LTD/estafet-microservices-scrum).
+Each microservice has it's own git repository, but there is a master git repository that contains links to all of the repositories [here](https://github.com/stericbro/estafet-microservices-scrum).
 ## Getting Started
-You can find a detailed explanation of how to install this (and other microservices) [here](https://github.com/Estafet-LTD/estafet-microservices-scrum#getting-started).
+You can find a detailed explanation of how to install this (and other microservices) [here](https://github.com/stericbro/estafet-microservices-scrum#getting-started).
 ## API Interface
 
 ### Messaging
@@ -94,6 +94,6 @@ TASK_API_DB_PASSWORD
 ## Domain Model States
 A task has three states. It can only progress from each state via the specific actions or events illustrated.
 
-![alt tag](https://github.com/Estafet-LTD/estafet-microservices-scrum-api-task/blob/master/TaskStateModel.png)
+![alt tag](https://github.com/stericbro/estafet-microservices-scrum-api-task/blob/master/TaskStateModel.png)
 
 

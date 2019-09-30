@@ -50,17 +50,17 @@ public class Task {
 	@JsonInclude(Include.NON_NULL)
 	@Column(name = "REMAINING_UPDATED")
 	private String remainingUpdated;
-	
+
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "STORY_ID", nullable = false, referencedColumnName = "STORY_ID", foreignKey = @ForeignKey(name = "TASK_TO_STORY_FK"))
 	private Story taskStory;
-	
+
 	public Task init() {
 		this.remainingHours = initialHours;
 		return this;
 	}
-	
+
 	public Task setTaskStory(Story taskStory) {
 		this.taskStory = taskStory;
 		return this;
@@ -111,7 +111,7 @@ public class Task {
 		status = newTask.getStatus() != null ? newTask.getStatus() : status;
 		return this;
 	}
-	
+
 	@JsonIgnore
 	public Story getStory() {
 		return taskStory;
@@ -181,7 +181,7 @@ public class Task {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	public String toJSON() {
 		try {
 			return new ObjectMapper().writeValueAsString(this);
@@ -189,7 +189,7 @@ public class Task {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	public static Task getAPI() {
 		Task task = new Task();
 		task.id = 1;

@@ -14,7 +14,7 @@ node("maven") {
 	      sh "mvn clean test"
 	    }
 	}
-		
+
 	stage("reset a-mq to purge topics") {
 		openshiftDeploy namespace: project, depCfg: "broker-amq", showBuildLogs: "true",  waitTime: "3000000"
 		openshiftVerifyDeployment namespace: project, depCfg: "broker-amq", replicaCount:"1", verifyReplicaCount: "true", waitTime: "300000"
@@ -45,7 +45,7 @@ node("maven") {
 			}
 		}
 	}
-	
+
 	stage("promote to test") {
 		openshiftTag namespace: project, srcStream: microservice, srcTag: 'latest', destinationNamespace: 'test', destinationStream: microservice, destinationTag: 'PrepareForTesting'
 	}

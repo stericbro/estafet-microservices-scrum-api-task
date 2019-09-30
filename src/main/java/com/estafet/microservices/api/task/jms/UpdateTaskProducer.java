@@ -17,7 +17,7 @@ public class UpdateTaskProducer {
 
 	@Autowired
 	private JmsTemplate jmsTemplate;
-	
+
 	public void sendMessage(Task task) {
 		jmsTemplate.setPubSubDomain(true);
 		jmsTemplate.convertAndSend("update.task.topic", task.toJSON(), new MessagePostProcessor() {
@@ -28,5 +28,5 @@ public class UpdateTaskProducer {
 			}
 		});
 	}
-	
+
 }

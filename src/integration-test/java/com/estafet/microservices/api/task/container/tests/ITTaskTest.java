@@ -29,14 +29,14 @@ public class ITTaskTest {
 
 	NewTaskTopicConsumer newTaskTopicConsumer;
 	UpdatedTaskTopicConsumer updatedTaskTopicConsumer;
-	
+
 	@Before
 	public void before() {
 		RestAssured.baseURI = System.getenv("TASK_API_SERVICE_URI");
 		newTaskTopicConsumer = new NewTaskTopicConsumer();
 		updatedTaskTopicConsumer = new UpdatedTaskTopicConsumer();
 	}
-	
+
 	@After
 	public void after() {
 		newTaskTopicConsumer.closeConnection();
@@ -95,9 +95,9 @@ public class ITTaskTest {
 				.body("remainingHours", is(5))
 				.body("status", is("Not Started"))
 				.extract().body().asString();
-		
+
 		Task newTask = Task.fromJSON(body);
-		
+
 		get("/task/" + newTask.getId()).then()
 			.body("id", is(newTask.getId()))
 			.body("title", is("Task #3"))
@@ -105,7 +105,7 @@ public class ITTaskTest {
 			.body("initialHours", is(5))
 			.body("remainingHours", is(5))
 			.body("status", is("Not Started"));
-		
+
 		Task task = newTaskTopicConsumer.consume(Task.class);
 		assertThat(task.getId(), is(newTask.getId()));
 		assertThat(task.getTitle(), is("Task #3"));
@@ -130,7 +130,7 @@ public class ITTaskTest {
 			.body("description", is("Task #2"))
 			.body("initialHours", is(20))
 			.body("remainingHours", is(5));
-		
+
 		get("/task/1001").then()
 			.body("id", is(1001))
 			.body("title", is("Task #2"))
@@ -138,16 +138,16 @@ public class ITTaskTest {
 			.body("initialHours", is(20))
 			.body("remainingHours", is(5))
 			.body("status", is("Not Started"));
-	
+
 		Task task = updatedTaskTopicConsumer.consume(Task.class);
 		assertThat(task.getId(), is(1001));
 		assertThat(task.getTitle(), is("Task #2"));
 		assertThat(task.getDescription(), is("Task #2"));
 		assertThat(task.getInitialHours(), is(20));
 		assertThat(task.getRemainingHours(), is(5));
-		assertThat(task.getStatus(), is("Not Started"));	
+		assertThat(task.getStatus(), is("Not Started"));
 	}
-	
+
 	@Test
 	@DatabaseSetup("ITTaskTest-data.xml")
 	public void testUpdateTaskRemainingHoursComplete() {
@@ -164,7 +164,7 @@ public class ITTaskTest {
 			.body("initialHours", is(20))
 			.body("remainingHours", is(0))
 			.body("status", is("Completed"));
-		
+
 		get("/task/1001").then()
 			.body("id", is(1001))
 			.body("title", is("Task #2"))
@@ -179,7 +179,7 @@ public class ITTaskTest {
 		assertThat(task.getDescription(), is("Task #2"));
 		assertThat(task.getInitialHours(), is(20));
 		assertThat(task.getRemainingHours(), is(0));
-		assertThat(task.getStatus(), is("Completed"));			
+		assertThat(task.getStatus(), is("Completed"));
 	}
 
 	@Test
@@ -198,7 +198,7 @@ public class ITTaskTest {
 			.body("initialHours", is(20))
 			.body("remainingHours", is(0))
 			.body("status", is("Completed"));
-	
+
 		Task task = updatedTaskTopicConsumer.consume(Task.class);
 		assertThat(task.getId(), is(1001));
 		assertThat(task.getTitle(), is("Task #2"));
@@ -230,7 +230,7 @@ public class ITTaskTest {
 		assertThat(task.getRemainingHours(), is(20));
 		assertThat(task.getStatus(), is("In Progress"));
 	}
-	
+
 	@Test
 	@DatabaseSetup("ITTaskTest-data.xml")
 	public void testNewStoryConsumer() {

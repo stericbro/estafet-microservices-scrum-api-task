@@ -15,13 +15,13 @@ import com.estafet.microservices.api.task.model.Task;
 
 @Service
 public class TaskService {
-		
+
 	@Autowired
 	private TaskDAO taskDAO;
-	
+
 	@Autowired
 	private StoryDAO storyDAO;
-	
+
 	@Autowired
 	private SprintDAO sprintDAO;
 
@@ -29,7 +29,7 @@ public class TaskService {
 	public Task getTask(int taskId) {
 		return taskDAO.getTask(taskId);
 	}
-	
+
 	@Transactional(readOnly = true)
 	public List<Task> getStoryTasks(int storyId) {
 		return taskDAO.getStoryTasks(storyId);
@@ -39,7 +39,7 @@ public class TaskService {
 	public Task createTask(int storyId, Task task) {
 		Story story = storyDAO.getStory(storyId);
 		if (!story.getStatus().equals("Completed")) {
-			return taskDAO.createTask(task.init().setTaskStory(story));	
+			return taskDAO.createTask(task.init().setTaskStory(story));
 		}
 		throw new RuntimeException("cannot add task to completed story");
 	}

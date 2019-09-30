@@ -33,7 +33,7 @@ public class Application extends SpringBootServletInitializer {
 				com.uber.jaeger.Configuration.SamplerConfiguration.fromEnv(),
 				com.uber.jaeger.Configuration.ReporterConfiguration.fromEnv()).getTracer();
 	}
-	
+
 	@Bean
 	public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {
 		return restTemplateBuilder.build();
@@ -47,5 +47,5 @@ public class Application extends SpringBootServletInitializer {
 		factory.setPubSubDomain(true);
 		return factory;
 	}
-	
+
 }

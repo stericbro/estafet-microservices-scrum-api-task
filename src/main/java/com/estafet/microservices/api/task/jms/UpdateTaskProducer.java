@@ -15,18 +15,18 @@ import com.estafet.microservices.api.task.model.Task;
 @Component
 public class UpdateTaskProducer {
 
-	@Autowired
-	private JmsTemplate jmsTemplate;
+    @Autowired
+    private JmsTemplate jmsTemplate;
 
-	public void sendMessage(Task task) {
-		jmsTemplate.setPubSubDomain(true);
-		jmsTemplate.convertAndSend("update.task.topic", task.toJSON(), new MessagePostProcessor() {
-			@Override
-			public Message postProcessMessage(Message message) throws JMSException {
-				message.setStringProperty("message.event.interaction.reference", UUID.randomUUID().toString());
-				return message;
-			}
-		});
-	}
+    public void sendMessage(Task task) {
+        jmsTemplate.setPubSubDomain(true);
+        jmsTemplate.convertAndSend("update.task.topic", task.toJSON(), new MessagePostProcessor() {
+            @Override
+            public Message postProcessMessage(Message message) throws JMSException {
+                message.setStringProperty("message.event.interaction.reference", UUID.randomUUID().toString());
+                return message;
+            }
+        });
+    }
 
 }

@@ -25,57 +25,57 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Table(name = "STORY")
 public class Story {
 
-	@Id
-	@Column(name = "STORY_ID")
-	private Integer id;
+    @Id
+    @Column(name = "STORY_ID")
+    private Integer id;
 
-	@Transient
-	private Integer sprintId;
+    @Transient
+    private Integer sprintId;
 
-	@Column(name = "STATUS", nullable = false)
-	private String status = "Not Started";
+    @Column(name = "STATUS", nullable = false)
+    private String status = "Not Started";
 
-	@JsonIgnore
-	@OneToMany(mappedBy = "taskStory", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Set<Task> tasks = new HashSet<Task>();
+    @JsonIgnore
+    @OneToMany(mappedBy = "taskStory", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Task> tasks = new HashSet<Task>();
 
-	@JsonIgnore
-	@ManyToOne
-	@JoinColumn(name = "SPRINT_ID", nullable = true, referencedColumnName = "SPRINT_ID", foreignKey = @ForeignKey(name = "STORY_TO_SPRINT_FK"))
-	private Sprint storySprint;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "SPRINT_ID", nullable = true, referencedColumnName = "SPRINT_ID", foreignKey = @ForeignKey(name = "STORY_TO_SPRINT_FK"))
+    private Sprint storySprint;
 
-	public Story setId(Integer id) {
-		this.id = id;
-		return this;
-	}
+    public Story setId(Integer id) {
+        this.id = id;
+        return this;
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public Integer getSprintId() {
-		return sprintId;
-	}
+    public Integer getSprintId() {
+        return sprintId;
+    }
 
-	public String getStatus() {
-		return status;
-	}
+    public String getStatus() {
+        return status;
+    }
 
-	@JsonIgnore
-	public Sprint getStorySprint() {
-		return storySprint;
-	}
+    @JsonIgnore
+    public Sprint getStorySprint() {
+        return storySprint;
+    }
 
-	public void setStorySprint(Sprint storySprint) {
-		this.storySprint = storySprint;
-	}
+    public void setStorySprint(Sprint storySprint) {
+        this.storySprint = storySprint;
+    }
 
-	public static Story fromJSON(String message) {
-		try {
-			return new ObjectMapper().readValue(message, Story.class);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
+    public static Story fromJSON(String message) {
+        try {
+            return new ObjectMapper().readValue(message, Story.class);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }

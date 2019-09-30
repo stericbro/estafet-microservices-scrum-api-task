@@ -10,12 +10,12 @@ import com.estafet.microservices.api.task.model.Sprint;
 @Repository
 public class SprintDAO {
 
-	@PersistenceContext
-	private EntityManager entityManager;
+    @PersistenceContext
+    private EntityManager entityManager;
 
-	public Sprint createSprint(Sprint sprint) {
-		entityManager.persist(sprint);
-		return sprint;
-	}
+    public Sprint createSprint(Sprint sprint) {
+        entityManager.persist(sprint);
+        return sprint;
+    }
 
 }

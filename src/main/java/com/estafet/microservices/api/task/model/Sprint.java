@@ -22,57 +22,57 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Sprint {
 
-	@Id
-	@Column(name = "SPRINT_ID")
-	private Integer id;
+    @Id
+    @Column(name = "SPRINT_ID")
+    private Integer id;
 
-	@Column(name = "START_DATE", nullable = false)
-	private String startDate;
+    @Column(name = "START_DATE", nullable = false)
+    private String startDate;
 
-	@Column(name = "END_DATE", nullable = false)
-	private String endDate;
+    @Column(name = "END_DATE", nullable = false)
+    private String endDate;
 
-	@Column(name = "SPRINT_NUMBER", nullable = false)
-	private Integer number;
+    @Column(name = "SPRINT_NUMBER", nullable = false)
+    private Integer number;
 
-	@Column(name = "NO_DAYS", nullable = false)
-	private Integer noDays;
+    @Column(name = "NO_DAYS", nullable = false)
+    private Integer noDays;
 
-	@JsonIgnore
-	@OneToMany(mappedBy = "storySprint", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Set<Story> stories = new HashSet<Story>();
+    @JsonIgnore
+    @OneToMany(mappedBy = "storySprint", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Story> stories = new HashSet<Story>();
 
-	public Integer getId() {
-		return id;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public String getStartDate() {
-		return startDate;
-	}
+    public String getStartDate() {
+        return startDate;
+    }
 
-	public String getEndDate() {
-		return endDate;
-	}
+    public String getEndDate() {
+        return endDate;
+    }
 
-	public Integer getNumber() {
-		return number;
-	}
+    public Integer getNumber() {
+        return number;
+    }
 
-	public Integer getNoDays() {
-		return noDays;
-	}
+    public Integer getNoDays() {
+        return noDays;
+    }
 
-	@JsonIgnore
-	public String getFirstSprintDay() {
-		return DateHelper.getSprintDays(startDate, noDays).get(0);
-	}
+    @JsonIgnore
+    public String getFirstSprintDay() {
+        return DateHelper.getSprintDays(startDate, noDays).get(0);
+    }
 
-	public static Sprint fromJSON(String message) {
-		try {
-			return new ObjectMapper().readValue(message, Sprint.class);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
+    public static Sprint fromJSON(String message) {
+        try {
+            return new ObjectMapper().readValue(message, Sprint.class);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }
